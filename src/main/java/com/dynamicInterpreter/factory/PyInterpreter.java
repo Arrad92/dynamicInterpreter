@@ -34,18 +34,12 @@ public class PyInterpreter implements Interpreter {
         context.setWriter(writer);
         context.setErrorWriter(errorWriter);
         try {
-        	PythonInterpreter interp = new PythonInterpreter();
-        	interp.set("a", new PyInteger(42));
-        	
         	engine.eval(statement.trim());
 			res = writer.toString().replace("\n", "");
-			System.out.println(res);
 		} catch (ScriptException e) {
 			res = e.getMessage();
-			System.out.println(res);
 		}catch (Exception e){
 			res = e.getMessage();
-			System.out.println(res);
 		}
         
 		return res;

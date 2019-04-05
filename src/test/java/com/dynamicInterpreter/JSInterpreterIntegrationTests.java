@@ -106,9 +106,9 @@ public class JSInterpreterIntegrationTests {
     @Test
     public void commandWithTimeLimitExceeded(){
     	Command cmd = new Command();
-		cmd.setCode("%javascript for(var i=0;i>=0;i++){print(i);}");
+		cmd.setCode("%javascript for(var i=0;i>=0;i++){}");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/command")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())

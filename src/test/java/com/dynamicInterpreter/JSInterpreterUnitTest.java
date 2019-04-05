@@ -25,6 +25,7 @@ public class JSInterpreterUnitTest {
             return JSInterpreter.getSession("1");
         }  
     }
+	
 	@Autowired
 	JSInterpreter jsInterpreter;
 	

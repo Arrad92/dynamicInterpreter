@@ -32,36 +32,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @AutoConfigureMockMvc
 public class DynamicInterpreter1ApplicationTests {
 
-	@Autowired
-	  private MockMvc mockMvc;
-	@Autowired
-	  private MockMvc mockMvc1;
-	  @Autowired
-	  private ObjectMapper objectMapper;
 	
 	@Test
 	public void contextLoads() {
-		Command cmd = new Command();
-		cmd.setCode("%javascript var a =1;");
-		try {
-			mockMvc.perform(post("/command", 42L)
-			        .contentType("application/json")
-			        .content(objectMapper.writeValueAsString(cmd)))
-			        .andExpect(status().isOk())
-			        .andExpect(jsonPath("$.res", is("")));
-			cmd.setCode("%javascript print(a+1);");
-			mockMvc.perform(post("/command", 42L)
-			        .contentType("application/json")
-			        .content(objectMapper.writeValueAsString(cmd)))
-			        .andExpect(status().isOk())
-			        .andExpect((ResultMatcher) jsonPath("$.res", contains("parsing error :")));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	
 	
