@@ -28,6 +28,7 @@ import com.dynamicInterpreter.factory.InterpreterFactory;
 public class CommandService {
 	 @Autowired
 	 InterpreterFactory interpreterFactory;
+	 private final int timeout = 10;
 	 /**
 	  * this method treat the command passed by the Command Controller
 	  * @param cmd : the Command object
@@ -46,7 +47,7 @@ public class CommandService {
 		 if(interpreter == null){
 			res.setRes("unknown interpreter"); 
 		 }else{
-			 res.setRes(this.executeWithTimeOut(cmdLine, interpreter, 10));
+			 res.setRes(this.executeWithTimeOut(cmdLine, interpreter, this.timeout));
 		 }
       	return res;
 	 }
