@@ -17,7 +17,6 @@ public class CommandController {
     CommandService cmdService;
 	@PostMapping("/command")
 	Result runCommand(@RequestBody Command cmd, HttpSession session) {
-		System.out.println("session id: "+session.getId());
 		return cmdService.treatCmd(cmd,session.getId());
 	}
 	
