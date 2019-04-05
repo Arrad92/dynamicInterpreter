@@ -113,7 +113,7 @@ public class CommandServiceUnitTest {
         
     }
     /**
-     * test case :  when passing two succesives commands with the same session id , 
+     * test case :  when passing two succesives commands with different session id , 
      * the second must depend on the first command result.
      * first command {"code" : "javascript var a=1;"}
      * second command {"code" : "javascript print(a+1)"}

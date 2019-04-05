@@ -30,7 +30,6 @@ public class JSInterpreter implements Interpreter {
 	}
 	
 	public String executeCmd(String statement) {
-		
 		String res="";
 		ScriptContext context = engine.getContext();
         // evaluate JavaScript code from String
@@ -38,22 +37,12 @@ public class JSInterpreter implements Interpreter {
         StringWriter errorWriter = new StringWriter();
         context.setWriter(writer);
         context.setErrorWriter(errorWriter);
-       
         try {
 			engine.eval(statement);
 			res = writer.toString().trim();
-			System.out.println(res);
 		} catch (ScriptException e) {
-			// TODO Auto-generated catch block
 			res = "parsing error :" + e.getMessage();
-			System.out.println(res);
-			
 		}
-        	
-        	
-			
-		
-        
 		return res;
 	}
     public static JSInterpreter getInstance(){
