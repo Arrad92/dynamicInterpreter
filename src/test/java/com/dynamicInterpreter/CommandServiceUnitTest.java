@@ -139,7 +139,7 @@ public class CommandServiceUnitTest {
     @Test
     public void commandWithTimeLimitExceeded(){
     	Command cmd = new Command();
-    	cmd.setCode("%javascript for(var i=0;i>=0;i++){print(i);}");
+    	cmd.setCode("%javascript for(var i=0;i>=0;i++){}");
         Result res = cmdService.treatCmd(cmd,"1");
         assertThat(res.getRes())
         .isEqualTo("Time Limit exceeded");
