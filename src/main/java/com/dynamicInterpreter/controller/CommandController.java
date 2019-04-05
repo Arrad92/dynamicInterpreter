@@ -15,7 +15,7 @@ import com.dynamicInterpreter.service.CommandService;
 public class CommandController {
 	@Autowired
     CommandService cmdService;
-	@PostMapping("/command")
+	@PostMapping("/execute")
 	Result runCommand(@RequestBody Command cmd, HttpSession session) {
 		return cmdService.treatCmd(cmd,session.getId());
 	}

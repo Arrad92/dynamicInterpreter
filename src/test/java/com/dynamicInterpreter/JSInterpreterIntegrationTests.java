@@ -44,7 +44,7 @@ public class JSInterpreterIntegrationTests {
 		Command cmd = new Command();
 		cmd.setCode("%javascript var a =1;");
 		try {
-			MvcResult mvcResult =  mockMvc.perform(post("/command", 42L)
+			MvcResult mvcResult =  mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -54,7 +54,7 @@ public class JSInterpreterIntegrationTests {
 			// reuse the previous session   
 			MockHttpSession session = (MockHttpSession) mvcResult
 			        .getRequest().getSession();
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 					.session(session)
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
@@ -81,13 +81,13 @@ public class JSInterpreterIntegrationTests {
 		Command cmd = new Command();
 		cmd.setCode("%javascript var a =1;");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
 			        .andExpect(jsonPath("$.res", is("")));
 			cmd.setCode("%javascript print(a+1);");
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -108,7 +108,7 @@ public class JSInterpreterIntegrationTests {
     	Command cmd = new Command();
 		cmd.setCode("%javascript for(var i=0;i>=0;i++){}");
 		try {
-			mockMvc.perform(post("/command")
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -129,7 +129,7 @@ public class JSInterpreterIntegrationTests {
     	Command cmd = new Command();
 		cmd.setCode("%javascript p");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -152,7 +152,7 @@ public class JSInterpreterIntegrationTests {
     	Command cmd = new Command();
 		cmd.setCode("%javascri p");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -173,7 +173,7 @@ public class JSInterpreterIntegrationTests {
     	Command cmd = new Command();
 		cmd.setCode("javascript print(1);");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())

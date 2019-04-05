@@ -44,7 +44,7 @@ public class PyInterpreterIntegrationTests {
 		Command cmd = new Command();
 		cmd.setCode("%python a = 1");
 		try {
-			MvcResult mvcResult =  mockMvc.perform(post("/command", 42L)
+			MvcResult mvcResult =  mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -54,7 +54,7 @@ public class PyInterpreterIntegrationTests {
 			// reuse the previous session   
 			MockHttpSession session = (MockHttpSession) mvcResult
 			        .getRequest().getSession();
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 					.session(session)
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
@@ -81,13 +81,13 @@ public class PyInterpreterIntegrationTests {
 		Command cmd = new Command();
 		cmd.setCode("%python a =1");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
 			        .andExpect(jsonPath("$.res", is("")));
 			cmd.setCode("%python print a+1");
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -106,9 +106,9 @@ public class PyInterpreterIntegrationTests {
     @Test
     public void commandWithTimeLimitExceeded(){
     	Command cmd = new Command();
-		cmd.setCode("%python while True: ");
+		cmd.setCode("%python while True: a = 1");
 		try {
-			mockMvc.perform(post("/command")
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -129,7 +129,7 @@ public class PyInterpreterIntegrationTests {
     	Command cmd = new Command();
 		cmd.setCode("%python p");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -152,7 +152,7 @@ public class PyInterpreterIntegrationTests {
     	Command cmd = new Command();
 		cmd.setCode("%pyt p");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
@@ -173,7 +173,7 @@ public class PyInterpreterIntegrationTests {
     	Command cmd = new Command();
 		cmd.setCode("python print(1);");
 		try {
-			mockMvc.perform(post("/command", 42L)
+			mockMvc.perform(post("/execute")
 			        .contentType("application/json")
 			        .content(objectMapper.writeValueAsString(cmd)))
 			        .andExpect(status().isOk())
