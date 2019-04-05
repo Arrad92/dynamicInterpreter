@@ -106,7 +106,7 @@ public class PyInterpreterIntegrationTests {
     @Test
     public void commandWithTimeLimitExceeded(){
     	Command cmd = new Command();
-		cmd.setCode("%python while True: print 1");
+		cmd.setCode("%python while True: ");
 		try {
 			mockMvc.perform(post("/command", 42L)
 			        .contentType("application/json")
